@@ -40,18 +40,16 @@ class ConvNet(nn.Module):
 net = ConvNet()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9)
+optimizer = optim.SGD(net.parameters(), lr=0.1, momentum=0.9)
 
 
 for epoch in range(20):
 
     optimizer.zero_grad()
-
-    # forward + backward + optimize
     outputs = net(X_train)
     loss = criterion(outputs, y_train)
     loss.backward()
     optimizer.step()
-    print(loss)
+    print('Loss after {} epochs is: {}'.format((epoch+1),loss.item()))
 
 print('Finished Training')
